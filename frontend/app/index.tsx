@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import { 
   View, 
   Text, 
@@ -16,7 +16,7 @@ import * as Location from 'expo-location';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import MotherBabyIllustration from '../src/components/MotherBabyIllustration';
 
-const { width, height } = Dimensions.get('window');
+const { width } = Dimensions.get('window');
 
 export default function SplashScreen() {
   const insets = useSafeAreaInsets();
@@ -37,10 +37,10 @@ export default function SplashScreen() {
       useNativeDriver: true,
     }).start();
 
-    // Progress bar animation
+    // Progress bar animation - smoother
     Animated.timing(progressWidth, {
       toValue: 100,
-      duration: 4000,
+      duration: 5000,
       useNativeDriver: false,
     }).start();
   }, []);
@@ -51,14 +51,11 @@ export default function SplashScreen() {
       const locationConsent = await AsyncStorage.getItem('doudou_location_consent');
       
       if (!hasLaunched) {
-        // First launch - show privacy notice after seeing splash
-        setTimeout(() => setShowPrivacyModal(true), 5000);
+        setTimeout(() => setShowPrivacyModal(true), 4000);
       } else if (!locationConsent) {
-        // Haven't asked for location consent yet
-        setTimeout(() => setShowLocationConsent(true), 5000);
+        setTimeout(() => setShowLocationConsent(true), 4000);
       } else {
         setHasConsented(true);
-        // Auto navigate after animation completes
         setTimeout(() => {
           router.replace('/(tabs)/explore');
         }, 5500);
@@ -90,7 +87,6 @@ export default function SplashScreen() {
     setShowLocationConsent(false);
     setHasConsented(true);
     
-    // Navigate to main app
     setTimeout(() => {
       router.replace('/(tabs)/explore');
     }, 500);
@@ -108,57 +104,50 @@ export default function SplashScreen() {
     }
   };
 
+  const circleSize = Math.min(width * 0.75, 320);
+
   return (
     <View style={[styles.container, { paddingTop: insets.top }]}>
-      {/* Language Toggle */}
-      <View style={styles.header}>
+      {/* Language Toggle - Top Right */}
+      <View style={styles.topBar}>
         <View style={styles.languageToggle}>
-          <TouchableOpacity 
-            onPress={() => handleLanguageChange('en')}
-            style={styles.langButton}
-          >
-            <Text style={[styles.langText, language === 'en' && styles.langActiveEN]}>
-              EN
-            </Text>
+          <TouchableOpacity onPress={() => handleLanguageChange('en')}>
+            <Text style={[styles.langText, language === 'en' && styles.langActive]}>EN</Text>
           </TouchableOpacity>
-          <Text style={styles.langDivider}>|</Text>
-          <TouchableOpacity 
-            onPress={() => handleLanguageChange('fr')}
-            style={styles.langButton}
-          >
-            <Text style={[styles.langText, language === 'fr' && styles.langActiveFR]}>
-              FR
-            </Text>
+          <Text style={styles.langSep}>|</Text>
+          <TouchableOpacity onPress={() => handleLanguageChange('fr')}>
+            <Text style={[styles.langText, language === 'fr' && styles.langActive]}>FR</Text>
           </TouchableOpacity>
         </View>
       </View>
 
       {/* Main Content */}
       <Animated.View style={[styles.content, { opacity: fadeAnim }]}>
-        {/* Illustration Circle with Halo Effect */}
-        <View style={styles.illustrationContainer}>
-          {/* Outer halo rings */}
-          <View style={styles.outerRing} />
-          <View style={styles.middleRing} />
+        {/* Pink Rings Container */}
+        <View style={[styles.ringsContainer, { width: circleSize, height: circleSize }]}>
+          {/* Outer ring */}
+          <View style={[styles.ringOuter, { width: circleSize * 1.15, height: circleSize * 1.15 }]} />
+          {/* Middle ring */}
+          <View style={[styles.ringMiddle, { width: circleSize * 1.05, height: circleSize * 1.05 }]} />
+          {/* Inner thick ring */}
+          <View style={[styles.ringInner, { width: circleSize * 0.92, height: circleSize * 0.92 }]} />
           
-          {/* Main illustration circle */}
-          <View style={styles.heroCircle}>
-            <MotherBabyIllustration size={200} />
+          {/* White card with illustration */}
+          <View style={[styles.illustrationCard, { width: circleSize * 0.72, height: circleSize * 0.72 }]}>
+            <MotherBabyIllustration size={circleSize * 0.65} />
           </View>
         </View>
 
-        {/* Branding */}
-        <View style={styles.branding}>
-          <Text style={styles.brandTitle}>Doudou</Text>
-          <Text style={styles.tagline}>
-            {language === 'fr' ? 'VOTRE ESPACE D\'ALLAITEMENT' : 'YOUR BREASTFEEDING SPACE'}
-          </Text>
-        </View>
+        {/* Title */}
+        <Text style={styles.title}>Doudou</Text>
+        <Text style={styles.subtitle}>
+          {language === 'fr' ? 'VOTRE ESPACE D\'ALLAITEMENT' : 'YOUR BREASTFEEDING SPACE'}
+        </Text>
       </Animated.View>
 
-      {/* Footer with Progress */}
-      <View style={[styles.footer, { paddingBottom: insets.bottom + 20 }]}>
-        <View style={styles.progressContainer}>
+      {/* Bottom - Progress Bar */}
+      <View style={[styles.bottom, { paddingBottom: insets.bottom + 24 }]}>
+        <View style={styles.progressTrack}>
           <Animated.View 
             style={[
               styles.progressBar,
@@ -171,23 +160,13 @@ export default function SplashScreen() {
             ]} 
           />
         </View>
-        <Text style={styles.loadingText}>
+        <Text style={styles.initText}>
           {language === 'fr' ? 'INITIALISATION...' : 'INITIALIZING...'}
         </Text>
-        
-        <TouchableOpacity style={styles.skipButton} onPress={handleSkip}>
-          <Text style={styles.skipText}>
-            {language === 'fr' ? 'Passer' : 'Skip'}
-          </Text>
-        </TouchableOpacity>
       </View>
 
       {/* Privacy Policy Modal */}
-      <Modal
-        visible={showPrivacyModal}
-        transparent
-        animationType="fade"
-      >
+      <Modal visible={showPrivacyModal} transparent animationType="fade">
         <View style={styles.modalOverlay}>
           <View style={styles.modalContent}>
             <Text style={styles.modalTitle}>
@@ -236,10 +215,7 @@ By using Doudou, you agree to these terms.`
               </Text>
             </ScrollView>
             
-            <TouchableOpacity 
-              style={styles.modalButton}
-              onPress={handleAcceptPrivacy}
-            >
+            <TouchableOpacity style={styles.modalButton} onPress={handleAcceptPrivacy}>
               <Text style={styles.modalButtonText}>
                 {language === 'fr' ? 'J\'accepte' : 'I Accept'}
               </Text>
@@ -249,11 +225,7 @@ By using Doudou, you agree to these terms.`
       </Modal>
 
       {/* Location Consent Modal */}
-      <Modal
-        visible={showLocationConsent}
-        transparent
-        animationType="fade"
-      >
+      <Modal visible={showLocationConsent} transparent animationType="fade">
         <View style={styles.modalOverlay}>
           <View style={styles.modalContent}>
             <View style={styles.locationIconContainer}>
@@ -303,125 +275,109 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#FFFFFF',
   },
-  header: {
+  topBar: {
     flexDirection: 'row',
     justifyContent: 'flex-end',
     paddingHorizontal: 24,
     paddingVertical: 16,
+    height: 60,
   },
   languageToggle: {
     flexDirection: 'row',
     alignItems: 'center',
   },
-  langButton: {
-    paddingHorizontal: 8,
-    paddingVertical: 4,
-  },
   langText: {
     fontSize: 14,
-    fontWeight: '600',
-    color: '#95A5A6',
-    letterSpacing: 0.5,
+    fontWeight: '700',
+    color: '#A8B1BD',
+    letterSpacing: 0.8,
   },
-  langActiveEN: {
-    color: '#E74C3C',
+  langActive: {
+    color: '#FF2AA3',
   },
-  langActiveFR: {
-    color: '#E74C3C',
-  },
-  langDivider: {
-    color: '#BDC3C7',
-    marginHorizontal: 4,
+  langSep: {
+    color: '#C7CDD6',
+    paddingHorizontal: 10,
     fontSize: 14,
   },
   content: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    paddingHorizontal: 32,
+    paddingHorizontal: 24,
   },
-  illustrationContainer: {
+  ringsContainer: {
     position: 'relative',
-    width: 280,
-    height: 280,
     alignItems: 'center',
     justifyContent: 'center',
-    marginBottom: 48,
+    marginBottom: 24,
   },
-  outerRing: {
+  ringOuter: {
     position: 'absolute',
-    width: 300,
-    height: 300,
-    borderRadius: 150,
-    borderWidth: 1,
-    borderColor: 'rgba(254, 235, 247, 0.5)',
+    borderRadius: 9999,
+    borderWidth: 2,
+    borderColor: 'rgba(255, 42, 163, 0.08)',
   },
-  middleRing: {
+  ringMiddle: {
     position: 'absolute',
-    width: 270,
-    height: 270,
-    borderRadius: 135,
-    borderWidth: 1,
-    borderColor: 'rgba(254, 235, 247, 0.7)',
+    borderRadius: 9999,
+    borderWidth: 2,
+    borderColor: 'rgba(255, 42, 163, 0.10)',
   },
-  heroCircle: {
-    width: 240,
-    height: 240,
-    borderRadius: 120,
-    backgroundColor: '#FEEBF7',
+  ringInner: {
+    position: 'absolute',
+    borderRadius: 9999,
+    borderWidth: 10,
+    borderColor: 'rgba(255, 42, 163, 0.10)',
+  },
+  illustrationCard: {
+    backgroundColor: '#FFFFFF',
+    borderRadius: 26,
     alignItems: 'center',
     justifyContent: 'center',
-    overflow: 'hidden',
+    shadowColor: '#FF2AA3',
+    shadowOffset: { width: 0, height: 0 },
+    shadowOpacity: 0.07,
+    shadowRadius: 20,
+    elevation: 4,
   },
-  branding: {
-    alignItems: 'center',
+  title: {
+    fontSize: 64,
+    fontWeight: '800',
+    color: '#0C1B2E',
+    letterSpacing: -1.5,
+    marginTop: 16,
   },
-  brandTitle: {
-    fontSize: 52,
-    fontWeight: '700',
-    color: '#2C3E50',
-    letterSpacing: -1,
-    fontFamily: 'System',
-  },
-  tagline: {
-    fontSize: 12,
-    fontWeight: '500',
-    color: '#7F8C8D',
-    letterSpacing: 3,
+  subtitle: {
+    fontSize: 16,
+    fontWeight: '600',
+    color: '#8A97A6',
+    letterSpacing: 2.5,
     marginTop: 8,
+    textTransform: 'uppercase',
   },
-  footer: {
+  bottom: {
     alignItems: 'center',
-    paddingHorizontal: 32,
+    gap: 14,
   },
-  progressContainer: {
-    width: 200,
-    height: 4,
-    backgroundColor: '#FEEBF7',
-    borderRadius: 2,
+  progressTrack: {
+    width: Math.min(340, width * 0.78),
+    height: 8,
+    backgroundColor: '#F1F3F6',
+    borderRadius: 999,
     overflow: 'hidden',
-    marginBottom: 12,
   },
   progressBar: {
     height: '100%',
-    backgroundColor: '#F55A9F',
-    borderRadius: 2,
+    backgroundColor: '#FF2AA3',
+    borderRadius: 999,
   },
-  loadingText: {
-    fontSize: 11,
-    fontWeight: '500',
-    color: '#7F8C8D',
-    letterSpacing: 2,
-    marginBottom: 20,
-  },
-  skipButton: {
-    paddingVertical: 8,
-    paddingHorizontal: 20,
-  },
-  skipText: {
+  initText: {
     fontSize: 14,
-    fontWeight: '600',
-    color: '#F55A9F',
+    fontWeight: '700',
+    color: '#B0B8C4',
+    letterSpacing: 3.5,
+    textTransform: 'uppercase',
   },
   // Modal Styles
   modalOverlay: {
@@ -442,12 +398,12 @@ const styles = StyleSheet.create({
   modalTitle: {
     fontSize: 22,
     fontWeight: '700',
-    color: '#2C3E50',
+    color: '#0C1B2E',
     textAlign: 'center',
     marginBottom: 16,
   },
   modalScroll: {
-    maxHeight: 300,
+    maxHeight: 280,
   },
   modalText: {
     fontSize: 14,
@@ -455,7 +411,7 @@ const styles = StyleSheet.create({
     color: '#475569',
   },
   modalButton: {
-    backgroundColor: '#F55A9F',
+    backgroundColor: '#FF2AA3',
     paddingVertical: 16,
     borderRadius: 12,
     alignItems: 'center',
@@ -466,7 +422,6 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     color: '#FFFFFF',
   },
-  // Location consent
   locationIconContainer: {
     alignItems: 'center',
     marginBottom: 16,
@@ -500,7 +455,7 @@ const styles = StyleSheet.create({
     color: '#64748B',
   },
   consentButtonPrimary: {
-    backgroundColor: '#F55A9F',
+    backgroundColor: '#FF2AA3',
   },
   consentButtonPrimaryText: {
     fontSize: 14,
