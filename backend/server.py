@@ -116,7 +116,8 @@ async def create_location(location: LocationCreate):
     
     result = await db.locations.insert_one(location_dict)
     location_dict["id"] = str(result.inserted_id)
-    del location_dict["_id"] if "_id" in location_dict else None
+    if "_id" in location_dict:
+        del location_dict["_id"]
     
     return LocationResponse(**location_dict)
 
