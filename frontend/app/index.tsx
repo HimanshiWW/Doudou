@@ -6,7 +6,6 @@ import {
   TouchableOpacity, 
   Animated,
   Dimensions,
-  Image,
   Modal,
   ScrollView,
 } from 'react-native';
@@ -15,6 +14,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useLanguageStore } from '../src/store/language';
 import * as Location from 'expo-location';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import MotherBabyIllustration from '../src/components/MotherBabyIllustration';
 
 const { width, height } = Dimensions.get('window');
 
