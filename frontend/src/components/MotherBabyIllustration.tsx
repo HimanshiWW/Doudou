@@ -6,13 +6,11 @@ interface Props {
 }
 
 export default function MotherBabyIllustration({ size = 200 }: Props) {
-  const scale = size / 200;
-  
   return (
     <Svg width={size} height={size} viewBox="0 0 200 200">
       <Defs>
         <ClipPath id="circleClip">
-          <Circle cx="100" cy="100" r="95" />
+          <Circle cx="100" cy="100" r="98" />
         </ClipPath>
       </Defs>
       
@@ -20,257 +18,218 @@ export default function MotherBabyIllustration({ size = 200 }: Props) {
         {/* Background - soft pink */}
         <Circle cx="100" cy="100" r="100" fill="#FEEBF7" />
         
-        {/* Mother's flowing hair - back portion */}
+        {/* === MOTHER'S HAIR - BACK LAYER === */}
+        {/* Hair flowing on left side */}
         <Path
-          d="M55 45 
-             C45 55, 40 75, 42 95
-             C44 115, 48 135, 55 155
-             C58 165, 62 175, 68 185
-             L72 185
-             C66 175, 62 165, 60 155
-             C54 135, 50 115, 50 95
-             C50 75, 55 60, 62 50
-             L55 45 Z"
+          d="M45 60 
+             C38 80, 35 110, 40 145
+             C42 160, 45 175, 50 190
+             L58 190
+             C53 175, 50 160, 48 145
+             C44 115, 46 85, 52 65
+             Z"
           fill="#8B5A3C"
         />
         
-        {/* Mother's head/face */}
-        <Ellipse cx="95" cy="58" rx="32" ry="35" fill="#F4D1C4" />
-        
-        {/* Mother's hair - top and side */}
+        {/* Hair flowing on right side */}
         <Path
-          d="M63 40
-             C70 25, 90 18, 110 22
-             C130 26, 140 40, 138 55
-             C136 45, 125 35, 110 32
-             C95 29, 80 32, 70 42
-             C65 48, 62 56, 62 65
-             L58 65
-             C58 52, 60 45, 63 40 Z"
+          d="M145 55
+             C155 75, 158 100, 155 135
+             C153 155, 148 175, 145 190
+             L137 190
+             C140 175, 144 155, 146 135
+             C149 105, 147 80, 140 62
+             Z"
           fill="#8B5A3C"
         />
         
-        {/* Hair flowing down right side */}
+        {/* === MOTHER'S FACE === */}
+        <Ellipse cx="96" cy="62" rx="38" ry="40" fill="#F5D5C8" />
+        
+        {/* === MOTHER'S HAIR - TOP LAYER === */}
         <Path
-          d="M125 45
-             C135 55, 140 70, 142 90
-             C144 110, 140 135, 135 160
-             C132 175, 128 190, 125 200
-             L118 200
-             C122 185, 126 170, 128 155
-             C132 135, 135 115, 134 95
-             C133 75, 128 60, 120 50
-             L125 45 Z"
+          d="M58 45
+             C65 25, 90 15, 115 20
+             C140 25, 155 42, 150 60
+             C148 50, 135 38, 115 33
+             C95 28, 75 32, 65 45
+             C58 55, 52 68, 52 80
+             L45 75
+             C45 60, 50 50, 58 45
+             Z"
           fill="#8B5A3C"
         />
         
-        {/* Hair strand detail */}
+        {/* Hair parting detail */}
         <Path
-          d="M70 50 C65 65, 58 85, 55 110"
+          d="M96 22 L98 50"
           stroke="#7A4A32"
-          strokeWidth="2"
-          fill="none"
-        />
-        <Path
-          d="M130 55 C135 75, 138 95, 136 120"
-          stroke="#7A4A32"
-          strokeWidth="2"
+          strokeWidth="1.5"
           fill="none"
         />
         
-        {/* Mother's closed left eye */}
+        {/* === MOTHER'S FACIAL FEATURES === */}
+        {/* Left closed eye - curved line with lashes */}
         <Path
-          d="M78 52 Q85 48, 92 52"
-          stroke="#3D3D3D"
-          strokeWidth="2"
+          d="M75 56 Q84 50, 93 56"
+          stroke="#4A4A4A"
+          strokeWidth="2.5"
           strokeLinecap="round"
           fill="none"
         />
-        
         {/* Left eyelashes */}
-        <Path
-          d="M80 50 L78 46"
-          stroke="#3D3D3D"
-          strokeWidth="1.5"
-          strokeLinecap="round"
-        />
-        <Path
-          d="M85 48 L84 44"
-          stroke="#3D3D3D"
-          strokeWidth="1.5"
-          strokeLinecap="round"
-        />
-        <Path
-          d="M90 49 L91 45"
-          stroke="#3D3D3D"
-          strokeWidth="1.5"
-          strokeLinecap="round"
-        />
+        <G stroke="#4A4A4A" strokeWidth="1.5" strokeLinecap="round">
+          <Path d="M77 53 L74 48" />
+          <Path d="M82 50 L80 45" />
+          <Path d="M88 49 L88 44" />
+          <Path d="M92 52 L95 48" />
+        </G>
         
-        {/* Mother's closed right eye */}
+        {/* Right closed eye - curved line with lashes */}
         <Path
-          d="M100 52 Q107 48, 114 52"
-          stroke="#3D3D3D"
-          strokeWidth="2"
+          d="M103 56 Q112 50, 121 56"
+          stroke="#4A4A4A"
+          strokeWidth="2.5"
           strokeLinecap="round"
           fill="none"
         />
-        
         {/* Right eyelashes */}
-        <Path
-          d="M102 49 L101 45"
-          stroke="#3D3D3D"
-          strokeWidth="1.5"
-          strokeLinecap="round"
-        />
-        <Path
-          d="M107 48 L107 44"
-          stroke="#3D3D3D"
-          strokeWidth="1.5"
-          strokeLinecap="round"
-        />
-        <Path
-          d="M112 50 L114 46"
-          stroke="#3D3D3D"
-          strokeWidth="1.5"
-          strokeLinecap="round"
-        />
+        <G stroke="#4A4A4A" strokeWidth="1.5" strokeLinecap="round">
+          <Path d="M105 52 L102 48" />
+          <Path d="M110 49 L110 44" />
+          <Path d="M115 50 L117 45" />
+          <Path d="M120 53 L123 48" />
+        </G>
         
-        {/* Mother's gentle smile */}
+        {/* Gentle smile */}
         <Path
-          d="M88 72 Q96 80, 104 72"
-          stroke="#C9A090"
-          strokeWidth="2"
+          d="M86 78 Q96 88, 106 78"
+          stroke="#D4A594"
+          strokeWidth="2.5"
           strokeLinecap="round"
           fill="none"
         />
         
-        {/* Slight blush on cheeks */}
-        <Ellipse cx="76" cy="65" rx="6" ry="4" fill="#F5C4B8" opacity="0.5" />
-        <Ellipse cx="116" cy="65" rx="6" ry="4" fill="#F5C4B8" opacity="0.5" />
+        {/* Soft blush on cheeks */}
+        <Ellipse cx="72" cy="70" rx="8" ry="5" fill="#F8C4B4" opacity="0.4" />
+        <Ellipse cx="120" cy="70" rx="8" ry="5" fill="#F8C4B4" opacity="0.4" />
         
-        {/* Mother's neck */}
+        {/* === MOTHER'S NECK === */}
         <Path
-          d="M85 88 L85 100 Q85 105, 90 108 L102 108 Q107 105, 107 100 L107 88"
-          fill="#F4D1C4"
+          d="M82 98 L82 110 Q82 115, 88 118 L108 118 Q114 115, 114 110 L114 98"
+          fill="#F5D5C8"
         />
         
-        {/* Mother's clothing/top - teal color */}
+        {/* === MOTHER'S CLOTHING/BODY - TEAL === */}
         <Path
-          d="M50 108
-             Q55 100, 75 98
-             L85 100
-             Q96 95, 107 100
-             L117 98
-             Q137 100, 145 108
-             L155 140
-             Q158 160, 155 180
-             L150 210
-             L45 210
-             L40 180
-             Q38 160, 42 140
-             L50 108 Z"
-          fill="#6BA89E"
+          d="M42 118
+             Q50 108, 75 105
+             L88 108
+             Q98 102, 108 108
+             L121 105
+             Q146 108, 154 118
+             L165 160
+             Q170 185, 165 210
+             L30 210
+             Q25 185, 32 160
+             Z"
+          fill="#6BAFA4"
         />
         
-        {/* Clothing neckline detail */}
+        {/* Clothing neckline - V shape */}
         <Path
-          d="M75 100 Q96 110, 117 100"
-          stroke="#5A9389"
-          strokeWidth="2"
+          d="M75 108 Q98 125, 121 108"
+          stroke="#5A9E93"
+          strokeWidth="2.5"
           fill="none"
         />
         
-        {/* Mother's left arm (cradling baby) */}
+        {/* === MOTHER'S ARMS === */}
+        {/* Left arm holding baby */}
         <Path
-          d="M50 115
-             C42 125, 38 140, 40 155
-             Q42 165, 50 170
-             L60 155
-             C55 145, 52 135, 55 125
-             L50 115 Z"
-          fill="#F4D1C4"
+          d="M42 125
+             C30 135, 25 155, 30 175
+             Q35 185, 45 182
+             L55 165
+             C50 150, 48 140, 52 130
+             Z"
+          fill="#F5D5C8"
         />
         
-        {/* Mother's right arm */}
+        {/* Right arm */}
         <Path
-          d="M145 115
-             C152 125, 155 140, 153 155
-             Q150 165, 142 168
-             L135 155
-             C138 145, 140 135, 138 125
-             L145 115 Z"
-          fill="#F4D1C4"
+          d="M154 125
+             C166 135, 170 155, 165 175
+             Q160 185, 150 182
+             L142 165
+             C146 150, 148 140, 144 130
+             Z"
+          fill="#F5D5C8"
         />
         
+        {/* Left hand visible */}
+        <Ellipse cx="45" cy="178" rx="10" ry="8" fill="#F5D5C8" />
+        
+        {/* === BABY === */}
         {/* Baby's head */}
-        <Ellipse cx="82" cy="130" rx="18" ry="16" fill="#F4D1C4" />
+        <Ellipse cx="85" cy="138" rx="22" ry="20" fill="#F5D5C8" />
         
         {/* Baby's ear */}
-        <Ellipse cx="66" cy="130" rx="4" ry="5" fill="#EBC4B6" />
+        <Ellipse cx="65" cy="138" rx="5" ry="6" fill="#EBC8BA" />
         
-        {/* Baby's closed eye */}
+        {/* Baby's tiny closed eye */}
         <Path
-          d="M76 128 Q80 125, 84 128"
-          stroke="#3D3D3D"
-          strokeWidth="1.5"
+          d="M78 135 Q83 131, 88 135"
+          stroke="#4A4A4A"
+          strokeWidth="1.8"
+          strokeLinecap="round"
+          fill="none"
+        />
+        {/* Baby's tiny lashes */}
+        <G stroke="#4A4A4A" strokeWidth="1" strokeLinecap="round">
+          <Path d="M80 133 L79 130" />
+          <Path d="M84 132 L85 129" />
+        </G>
+        
+        {/* Baby's little smile */}
+        <Path
+          d="M80 146 Q86 150, 92 146"
+          stroke="#D4A594"
+          strokeWidth="1.8"
           strokeLinecap="round"
           fill="none"
         />
         
-        {/* Baby's tiny eyelashes */}
+        {/* Baby's blush */}
+        <Ellipse cx="95" cy="142" rx="5" ry="3" fill="#F8C4B4" opacity="0.4" />
+        
+        {/* === BABY'S BLANKET === */}
         <Path
-          d="M78 126 L77 124"
-          stroke="#3D3D3D"
-          strokeWidth="1"
-          strokeLinecap="round"
-        />
-        <Path
-          d="M82 126 L83 124"
-          stroke="#3D3D3D"
-          strokeWidth="1"
-          strokeLinecap="round"
+          d="M62 152
+             C55 165, 52 185, 60 200
+             Q70 215, 95 220
+             L130 220
+             Q145 215, 148 195
+             C152 175, 145 160, 130 152
+             Q110 145, 85 148
+             Z"
+          fill="#7CC4B8"
         />
         
-        {/* Baby's peaceful smile */}
+        {/* Blanket fold lines */}
         <Path
-          d="M78 136 Q82 139, 86 136"
-          stroke="#C9A090"
-          strokeWidth="1.5"
-          strokeLinecap="round"
-          fill="none"
-        />
-        
-        {/* Baby's body wrapped in blanket */}
-        <Path
-          d="M68 142
-             C62 150, 60 165, 65 180
-             Q70 195, 85 200
-             L120 200
-             Q130 195, 132 180
-             C135 165, 130 150, 120 145
-             Q105 138, 85 140
-             L68 142 Z"
-          fill="#7DBEB2"
-        />
-        
-        {/* Blanket fold detail */}
-        <Path
-          d="M70 150 Q90 158, 115 148"
-          stroke="#6BA89E"
+          d="M65 162 Q95 175, 125 160"
+          stroke="#6BB4A8"
           strokeWidth="2"
           fill="none"
         />
         <Path
-          d="M72 165 Q92 172, 118 162"
-          stroke="#6BA89E"
+          d="M68 180 Q98 190, 128 178"
+          stroke="#6BB4A8"
           strokeWidth="1.5"
           fill="none"
-          opacity="0.6"
+          opacity="0.5"
         />
-        
-        {/* Small highlight on baby's cheek */}
-        <Ellipse cx="90" cy="132" rx="3" ry="2" fill="#FAE0D8" opacity="0.6" />
       </G>
     </Svg>
   );
