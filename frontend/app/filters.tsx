@@ -11,8 +11,8 @@ import {
 import { router } from 'expo-router';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
-import { useLanguageStore } from '../store/language';
-import { useLocationsStore, Filters } from '../store/locations';
+import { useLanguageStore } from '../src/store/language';
+import { useLocationsStore, Filters } from '../src/store/locations';
 
 const { height } = Dimensions.get('window');
 

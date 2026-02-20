@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import { router } from 'expo-router';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { useLanguageStore } from '../store/language';
+import { useLanguageStore } from '../src/store/language';
 import { Ionicons } from '@expo/vector-icons';
 
 const { width } = Dimensions.get('window');

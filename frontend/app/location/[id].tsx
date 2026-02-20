@@ -14,8 +14,8 @@ import {
 import { router, useLocalSearchParams } from 'expo-router';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
-import { useLanguageStore } from '../../store/language';
-import { useLocationsStore, Review } from '../../store/locations';
+import { useLanguageStore } from '../../src/store/language';
+import { useLocationsStore, Review } from '../../src/store/locations';
 
 export default function LocationDetailScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();

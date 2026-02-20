@@ -14,8 +14,8 @@ import {
 import { router } from 'expo-router';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
-import { useLanguageStore } from '../../store/language';
-import { useLocationsStore, Location } from '../../store/locations';
+import { useLanguageStore } from '../../src/store/language';
+import { useLocationsStore, Location } from '../../src/store/locations';
 
 const { width } = Dimensions.get('window');
 

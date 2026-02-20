@@ -12,8 +12,8 @@ import {
 import { router } from 'expo-router';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
-import { useLanguageStore } from '../../store/language';
-import { useLocationsStore } from '../../store/locations';
+import { useLanguageStore } from '../../src/store/language';
+import { useLocationsStore } from '../../src/store/locations';
 
 export default function SavedScreen() {
   const insets = useSafeAreaInsets();
