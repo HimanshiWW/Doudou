@@ -143,30 +143,7 @@ export default function SplashScreen() {
           
           {/* Main illustration circle */}
           <View style={styles.heroCircle}>
-            {/* Mother and baby illustration using SVG-like elements */}
-            <View style={styles.illustrationWrapper}>
-              {/* Mother's hair */}
-              <View style={styles.motherHair} />
-              <View style={styles.motherHairWave} />
-              
-              {/* Mother's face */}
-              <View style={styles.motherFace}>
-                <View style={styles.motherEye} />
-                <View style={styles.motherSmile} />
-              </View>
-              
-              {/* Mother's body/clothing */}
-              <View style={styles.motherBody}>
-                {/* Baby */}
-                <View style={styles.baby}>
-                  <View style={styles.babyHead} />
-                  <View style={styles.babyBody} />
-                </View>
-              </View>
-              
-              {/* Mother's arm */}
-              <View style={styles.motherArm} />
-            </View>
+            <MotherBabyIllustration size={200} />
           </View>
         </View>
 
