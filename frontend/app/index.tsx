@@ -51,17 +51,17 @@ export default function SplashScreen() {
       const locationConsent = await AsyncStorage.getItem('doudou_location_consent');
       
       if (!hasLaunched) {
-        // First launch - show privacy notice after a longer delay to see splash
-        setTimeout(() => setShowPrivacyModal(true), 3000);
+        // First launch - show privacy notice after seeing splash
+        setTimeout(() => setShowPrivacyModal(true), 5000);
       } else if (!locationConsent) {
         // Haven't asked for location consent yet
-        setTimeout(() => setShowLocationConsent(true), 3000);
+        setTimeout(() => setShowLocationConsent(true), 5000);
       } else {
         setHasConsented(true);
         // Auto navigate after animation completes
         setTimeout(() => {
           router.replace('/(tabs)/explore');
-        }, 4500);
+        }, 5500);
       }
     } catch (error) {
       console.log('Error checking first launch:', error);
