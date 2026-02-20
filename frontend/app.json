@@ -10,19 +10,46 @@
     "newArchEnabled": true,
     "ios": {
       "supportsTablet": true,
+      "bundleIdentifier": "com.doudou.breastfeeding",
       "infoPlist": {
-        "NSLocationWhenInUseUsageDescription": "Find nursing-friendly locations near you"
+        "NSLocationWhenInUseUsageDescription": "Doudou uses your location to show you breastfeeding-friendly spaces nearby. Your location is never shared with third parties.",
+        "NSLocationAlwaysAndWhenInUseUsageDescription": "Doudou uses your location to show you breastfeeding-friendly spaces nearby. Your location is never shared with third parties.",
+        "NSLocationAlwaysUsageDescription": "Doudou uses your location to show you breastfeeding-friendly spaces nearby.",
+        "NSCameraUsageDescription": "Add photos of nursing-friendly locations to help other mothers.",
+        "NSPhotoLibraryUsageDescription": "Select photos to share with your reviews.",
+        "ITSAppUsesNonExemptEncryption": false
+      },
+      "privacyManifests": {
+        "NSPrivacyAccessedAPITypes": [
+          {
+            "NSPrivacyAccessedAPIType": "NSPrivacyAccessedAPICategoryUserDefaults",
+            "NSPrivacyAccessedAPITypeReasons": ["CA92.1"]
+          }
+        ],
+        "NSPrivacyCollectedDataTypes": [
+          {
+            "NSPrivacyCollectedDataType": "NSPrivacyCollectedDataTypePreciseLocation",
+            "NSPrivacyCollectedDataTypeLinked": false,
+            "NSPrivacyCollectedDataTypeTracking": false,
+            "NSPrivacyCollectedDataTypePurposes": ["NSPrivacyCollectedDataTypePurposeAppFunctionality"]
+          }
+        ],
+        "NSPrivacyTracking": false
       }
     },
     "android": {
+      "package": "com.doudou.breastfeeding",
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
-        "backgroundColor": "#ee2b6c"
+        "backgroundColor": "#FEEBF7"
       },
       "edgeToEdgeEnabled": true,
       "permissions": [
         "ACCESS_FINE_LOCATION",
-        "ACCESS_COARSE_LOCATION"
+        "ACCESS_COARSE_LOCATION",
+        "CAMERA",
+        "READ_EXTERNAL_STORAGE",
+        "WRITE_EXTERNAL_STORAGE"
       ]
     },
     "web": {
@@ -35,7 +62,9 @@
       [
         "expo-location",
         {
-          "locationAlwaysAndWhenInUsePermission": "Doudou needs your location to find nursing-friendly spots nearby."
+          "locationAlwaysAndWhenInUsePermission": "Doudou uses your location to find nursing-friendly spots nearby. Your location is never shared.",
+          "isIosBackgroundLocationEnabled": false,
+          "isAndroidBackgroundLocationEnabled": false
         }
       ],
       [
